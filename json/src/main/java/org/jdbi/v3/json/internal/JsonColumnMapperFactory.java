@@ -45,7 +45,7 @@ public class JsonColumnMapperFactory implements ColumnMapperFactory {
         ColumnMappers cm = config.get(ColumnMappers.class);
         // look for specialized json support first, revert to simple String mapping if absent
         ColumnMapper<String> jsonStringMapper = JdbiOptionals.findFirstPresent(
-                () -> cm.findFor(QualifiedType.of(String.class).with(Json.class)),
+                () -> cm.findFor(QualifiedType.of(String.class).withClasses(Json.class)),
                 () -> cm.findFor(String.class))
                 .orElseThrow(() -> new UnableToProduceResultException(JSON_NOT_RETRIEVABLE));
 

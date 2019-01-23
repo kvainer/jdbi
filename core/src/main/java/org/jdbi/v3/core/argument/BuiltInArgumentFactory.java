@@ -60,7 +60,7 @@ public class BuiltInArgumentFactory implements ArgumentFactory {
         private final EnumArgumentFactory delegate = new EnumArgumentFactory();
         @Override
         public Optional<Argument> build(Type expectedType, Object rawValue, ConfigRegistry config) {
-            return delegate.build(QualifiedType.of(expectedType).with(EnumByName.class), rawValue, config);
+            return delegate.build(QualifiedType.of(expectedType).withClasses(EnumByName.class), rawValue, config);
         }
     }
 }

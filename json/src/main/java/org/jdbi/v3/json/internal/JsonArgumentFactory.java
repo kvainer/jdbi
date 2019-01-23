@@ -45,7 +45,7 @@ public class JsonArgumentFactory implements ArgumentFactory {
         Arguments a = config.get(Arguments.class);
         // look for specialized json support first, revert to simple String binding if absent
         return Optional.of(JdbiOptionals.findFirstPresent(
-                () -> a.findFor(QualifiedType.of(String.class).with(Json.class), json),
+                () -> a.findFor(QualifiedType.of(String.class).withClasses(Json.class), json),
                 () -> a.findFor(String.class, json))
                 .orElseThrow(() -> new UnableToCreateStatementException(JSON_NOT_STORABLE)));
     }

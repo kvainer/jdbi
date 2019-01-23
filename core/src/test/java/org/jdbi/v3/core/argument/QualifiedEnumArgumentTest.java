@@ -36,7 +36,7 @@ public class QualifiedEnumArgumentTest {
             h.createUpdate("create table enums(id int, name varchar)").execute();
 
             h.createUpdate("insert into enums (id, name) values (1, :name)")
-                .bindByType("name", Foobar.FOO, QualifiedType.of(Foobar.class).with(EnumByName.class))
+                .bindByType("name", Foobar.FOO, QualifiedType.of(Foobar.class).withClasses(EnumByName.class))
                 .execute();
 
             String inserted = h.createQuery("select name from enums")
@@ -52,7 +52,7 @@ public class QualifiedEnumArgumentTest {
             h.createUpdate("create table enums(id int, ordinal int)").execute();
 
             h.createUpdate("insert into enums (id, ordinal) values (1, :ordinal)")
-                .bindByType("ordinal", Foobar.FOO, QualifiedType.of(Foobar.class).with(EnumByOrdinal.class))
+                .bindByType("ordinal", Foobar.FOO, QualifiedType.of(Foobar.class).withClasses(EnumByOrdinal.class))
                 .execute();
 
             Integer inserted = h.createQuery("select ordinal from enums")
@@ -104,7 +104,7 @@ public class QualifiedEnumArgumentTest {
             h.createUpdate("create table enums(id int, name varchar)").execute();
 
             h.createUpdate("insert into enums(id, name) values(1, :name)")
-                .bindByType("name", ByOrdinal.NUMERIC, QualifiedType.of(ByOrdinal.class).with(EnumByName.class))
+                .bindByType("name", ByOrdinal.NUMERIC, QualifiedType.of(ByOrdinal.class).withClasses(EnumByName.class))
                 .execute();
 
             String inserted = h.createQuery("select name from enums")
@@ -120,7 +120,7 @@ public class QualifiedEnumArgumentTest {
             h.createUpdate("create table enums(id int, ordinal int)").execute();
 
             h.createUpdate("insert into enums(id, ordinal) values(1, :ordinal)")
-                .bindByType("ordinal", ByName.ALPHABETIC, QualifiedType.of(ByName.class).with(EnumByOrdinal.class))
+                .bindByType("ordinal", ByName.ALPHABETIC, QualifiedType.of(ByName.class).withClasses(EnumByOrdinal.class))
                 .execute();
 
             Integer inserted = h.createQuery("select ordinal from enums")

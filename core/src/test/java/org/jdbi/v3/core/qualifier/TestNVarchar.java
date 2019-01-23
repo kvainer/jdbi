@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TestNVarchar {
-    private static final QualifiedType<String> NVARCHAR_STRING = QualifiedType.of(String.class).with(NVarchar.class);
+    private static final QualifiedType<String> NVARCHAR_STRING = QualifiedType.of(String.class).withClasses(NVarchar.class);
 
     @Rule
     public DatabaseRule dbRule = new H2DatabaseRule();
@@ -77,13 +77,13 @@ public class TestNVarchar {
 
             assertThat(
                 handle.select("SELECT name FROM nvarchars ORDER BY id")
-                    .mapTo(QualifiedType.of(String.class).with(NVarchar.class))
+                    .mapTo(QualifiedType.of(String.class).withClasses(NVarchar.class))
                     .list())
                 .containsExactly("foo", "bar", "baz", "qux");
 
             assertThat(
                 handle.select("SELECT name FROM nvarchars ORDER BY id")
-                    .mapTo(QualifiedType.of(new GenericType<String>() {}).with(NVarchar.class))
+                    .mapTo(QualifiedType.of(new GenericType<String>() {}).withClasses(NVarchar.class))
                     .list())
                 .containsExactly("foo", "bar", "baz", "qux");
 

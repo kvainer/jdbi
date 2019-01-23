@@ -33,7 +33,7 @@ public class StatementContextTest {
 
         // it's about the return type being String and not ?
         @SuppressWarnings("unused")
-        Optional<ColumnMapper<String>> mapper = context.findColumnMapperFor(QualifiedType.of(String.class).with(NVarchar.class));
+        Optional<ColumnMapper<String>> mapper = context.findColumnMapperFor(QualifiedType.of(String.class).withClasses(NVarchar.class));
     }
 
     @Test

@@ -43,7 +43,7 @@ public class QualifiedEnumMappingTest {
 
         Object byName = h.createQuery("select :name")
             .bind("name", Foobar.FOO.name())
-            .mapTo(QualifiedType.of(Foobar.class).with(EnumByName.class))
+            .mapTo(QualifiedType.of(Foobar.class).withClasses(EnumByName.class))
             .findOnly();
 
         assertThat(byName)
@@ -54,7 +54,7 @@ public class QualifiedEnumMappingTest {
     public void methodCallCanBeAnnotatedAsByOrdinal() {
         Object byOrdinal = h.createQuery("select :ordinal")
             .bind("ordinal", Foobar.FOO.ordinal())
-            .mapTo(QualifiedType.of(Foobar.class).with(EnumByOrdinal.class))
+            .mapTo(QualifiedType.of(Foobar.class).withClasses(EnumByOrdinal.class))
             .findOnly();
 
         assertThat(byOrdinal)
@@ -91,7 +91,7 @@ public class QualifiedEnumMappingTest {
 
         Object byName = h.createQuery("select :name")
             .bind("name", ByOrdinal.NUMERIC.name())
-            .mapTo(QualifiedType.of(ByOrdinal.class).with(EnumByName.class))
+            .mapTo(QualifiedType.of(ByOrdinal.class).withClasses(EnumByName.class))
             .findOnly();
 
         assertThat(byName)
@@ -102,7 +102,7 @@ public class QualifiedEnumMappingTest {
     public void methodCallOverridesClassForOrdinal() {
         Object byOrdinal = h.createQuery("select :ordinal")
             .bind("ordinal", ByName.ALPHABETIC.ordinal())
-            .mapTo(QualifiedType.of(ByName.class).with(EnumByOrdinal.class))
+            .mapTo(QualifiedType.of(ByName.class).withClasses(EnumByOrdinal.class))
             .findOnly();
 
         assertThat(byOrdinal)

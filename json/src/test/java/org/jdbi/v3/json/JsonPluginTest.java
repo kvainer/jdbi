@@ -53,14 +53,14 @@ public class JsonPluginTest {
 
         Object result = db.getJdbi().withHandle(h -> {
             h.createUpdate("insert into foo(bar) values(:foo)")
-                .bindByType("foo", instance, QualifiedType.of(Foo.class).with(Json.class))
+                .bindByType("foo", instance, QualifiedType.of(Foo.class).withClasses(Json.class))
                 .execute();
 
             assertThat(h.createQuery("select bar from foo").mapTo(String.class).findOnly())
                 .isEqualTo(json);
 
             return h.createQuery("select bar from foo")
-                .mapTo(QualifiedType.of(Foo.class).with(Json.class))
+                .mapTo(QualifiedType.of(Foo.class).withClasses(Json.class))
                 .findOnly();
         });
 

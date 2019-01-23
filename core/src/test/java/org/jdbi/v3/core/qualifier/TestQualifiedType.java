@@ -25,9 +25,9 @@ import static org.jdbi.v3.core.qualifier.SampleQualifiers.foo;
 public class TestQualifiedType {
     @Test
     public void testQualifiedType() {
-        assertThat(QualifiedType.of(String.class).with(NVarchar.class))
-            .isEqualTo(QualifiedType.of(String.class).with(NVarchar.class))
-            .hasSameHashCodeAs(QualifiedType.of(String.class).with(NVarchar.class))
+        assertThat(QualifiedType.of(String.class).withClasses(NVarchar.class))
+            .isEqualTo(QualifiedType.of(String.class).withClasses(NVarchar.class))
+            .hasSameHashCodeAs(QualifiedType.of(String.class).withClasses(NVarchar.class))
             .hasToString("@org.jdbi.v3.core.qualifier.NVarchar() java.lang.String");
 
         assertThat(QualifiedType.of(int.class))

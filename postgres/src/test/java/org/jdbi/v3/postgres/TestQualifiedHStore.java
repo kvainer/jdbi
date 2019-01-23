@@ -69,7 +69,7 @@ public class TestQualifiedHStore {
     @Test
     public void testReadsViaFluentAPI() {
         List<Map<String, String>> caps = handle.createQuery("select caps from campaigns order by id")
-                .mapTo(QualifiedType.of(STRING_MAP).with(HStore.class))
+                .mapTo(QualifiedType.of(STRING_MAP).withClasses(HStore.class))
                 .list();
         assertThat(caps).isEqualTo(ImmutableList.of(
                 ImmutableMap.of("yearly", "10000", "monthly", "5000", "daily", "200"),
@@ -82,7 +82,7 @@ public class TestQualifiedHStore {
         handle.execute("insert into campaigns(id, caps) values (?,?)", 4, ImmutableMap.of());
         Map<String, String> newCaps = handle.createQuery("select caps from campaigns where id=?")
                 .bind(0, 4)
-                .mapTo(QualifiedType.of(STRING_MAP).with(HStore.class))
+                .mapTo(QualifiedType.of(STRING_MAP).withClasses(HStore.class))
                 .findOnly();
         assertThat(newCaps).isEmpty();
     }
@@ -92,7 +92,7 @@ public class TestQualifiedHStore {
         handle.execute("insert into campaigns(id, caps) values (?,?)", 4, null);
         Map<String, String> newCaps = handle.createQuery("select caps from campaigns where id=?")
                 .bind(0, 4)
-                .mapTo(QualifiedType.of(STRING_MAP).with(HStore.class))
+                .mapTo(QualifiedType.of(STRING_MAP).withClasses(HStore.class))
                 .findOnly();
         assertThat(newCaps).isNull();
     }
@@ -103,7 +103,7 @@ public class TestQualifiedHStore {
         expectedException.expectMessage("No mapper registered for type @org.jdbi.v3.postgres.HStore() java.util.Map<java.lang.String, java.lang.Object>");
 
         handle.createQuery("select caps from campaigns order by id")
-                .mapTo(QualifiedType.of(new GenericType<Map<String, Object>>() {}).with(HStore.class))
+                .mapTo(QualifiedType.of(new GenericType<Map<String, Object>>() {}).withClasses(HStore.class))
                 .list();
     }
 
@@ -111,11 +111,11 @@ public class TestQualifiedHStore {
     public void testWritesViaFluentApi() {
         handle.createUpdate("insert into campaigns(id, caps) values (:id, :caps)")
             .bind("id", 3)
-            .bindByType("caps", caps, QualifiedType.of(STRING_MAP).with(HStore.class))
+            .bindByType("caps", caps, QualifiedType.of(STRING_MAP).withClasses(HStore.class))
             .execute();
         Map<String, String> newCaps = handle.createQuery("select caps from campaigns where id=?")
                 .bind(0, 3)
-                .mapTo(QualifiedType.of(STRING_MAP).with(HStore.class))
+                .mapTo(QualifiedType.of(STRING_MAP).withClasses(HStore.class))
                 .findOnly();
         assertThat(newCaps).isEqualTo(caps);
     }

@@ -350,7 +350,7 @@ public abstract class SqlStatement<This extends SqlStatement<This>> extends Base
      */
     @Beta
     public final This bindNVarchar(int position, String value) {
-        return bind(position, toArgument(QualifiedType.of(String.class).with(NVarchar.class), value));
+        return bind(position, toArgument(QualifiedType.of(String.class).withClasses(NVarchar.class), value));
     }
 
     /**
@@ -363,7 +363,7 @@ public abstract class SqlStatement<This extends SqlStatement<This>> extends Base
      */
     @Beta
     public final This bindNVarchar(String name, String value) {
-        return bind(name, toArgument(QualifiedType.of(String.class).with(NVarchar.class), value));
+        return bind(name, toArgument(QualifiedType.of(String.class).withClasses(NVarchar.class), value));
     }
 
     /**

@@ -153,7 +153,7 @@ public class EnumsConfigTest {
 
     @Test
     public void testConflictingQualifiers() {
-        QualifiedType<RetentionPolicy> type = QualifiedType.of(RetentionPolicy.class).with(EnumByName.class, EnumByOrdinal.class);
+        QualifiedType<RetentionPolicy> type = QualifiedType.of(RetentionPolicy.class).withClasses(EnumByName.class, EnumByOrdinal.class);
 
         assertThatThrownBy(() -> db.getJdbi().getConfig(EnumStrategies.class).findStrategy(type))
             .isInstanceOf(IllegalArgumentException.class);

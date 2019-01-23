@@ -53,11 +53,11 @@ public abstract class AbstractJsonMapperTest {
 
             JsonBean in = new JsonBean("nom", 10);
             h.createUpdate("insert into subjects(id, subject) values(1, :bean)")
-                .bindByType("bean", in, QualifiedType.of(JsonBean.class).with(Json.class))
+                .bindByType("bean", in, QualifiedType.of(JsonBean.class).withClasses(Json.class))
                 .execute();
 
             JsonBean out = h.createQuery("select subject from subjects")
-                .mapTo(QualifiedType.of(JsonBean.class).with(Json.class))
+                .mapTo(QualifiedType.of(JsonBean.class).withClasses(Json.class))
                 .findOnly();
 
             assertThat(out).isEqualTo(in);

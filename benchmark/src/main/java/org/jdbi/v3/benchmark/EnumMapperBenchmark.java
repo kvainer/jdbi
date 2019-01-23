@@ -80,7 +80,7 @@ public class EnumMapperBenchmark {
     public List<Tribble> mapByExactName() {
         return jdbi.withHandle(h ->
             h.select("select name from exact_name")
-                .mapTo(QualifiedType.of(Tribble.class).with(EnumByName.class))
+                .mapTo(QualifiedType.of(Tribble.class).withClasses(EnumByName.class))
                 .list());
     }
 
@@ -88,7 +88,7 @@ public class EnumMapperBenchmark {
     public List<Tribble> mapByRandomCaseName() {
         return jdbi.withHandle(h ->
             h.select("select name from random_case")
-                .mapTo(QualifiedType.of(Tribble.class).with(EnumByName.class))
+                .mapTo(QualifiedType.of(Tribble.class).withClasses(EnumByName.class))
                 .list());
     }
 
@@ -96,7 +96,7 @@ public class EnumMapperBenchmark {
     public List<Tribble> mapByOrdinal() {
         return jdbi.withHandle(h ->
             h.select("select ordinal from ordinals")
-                .mapTo(QualifiedType.of(Tribble.class).with(EnumByOrdinal.class))
+                .mapTo(QualifiedType.of(Tribble.class).withClasses(EnumByOrdinal.class))
                 .list());
     }
 
