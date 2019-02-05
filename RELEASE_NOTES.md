@@ -5,6 +5,8 @@
   - @UseEnumStrategy SqlObject configurer for setting the default enum strategy.
   - @EnumByName and @EnumByOrdinal qualifying annotations to override said default policy.
   - Support for Postgres custom types, both user defined and driver types like `PGInterval` or `PGcircle`
+  - SetObjectArgumentFactory and GetObjectColumnMapperFactory to easily make use of direct type support
+    provided by your database driver (e.g. many databases now directly support `java.time` objects).
 - Improvements
   - Improve Error handling with transactions
 - Minor source incompatibility
